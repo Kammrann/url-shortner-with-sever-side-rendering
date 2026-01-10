@@ -12,13 +12,12 @@ async function handleGenerateNewShortURL(req, res) {
     redirectURL: body.url,
     visitHistory: [],
   });
-
- // 🔥 NEW PART
+  
   const allUrls = await URL.find({});
 
   return res.render("home", {
     id: shortID,
-    urls: allUrls,   // 👈 table ko data mil gaya
+    urls: allUrls,
   });
 }
 
