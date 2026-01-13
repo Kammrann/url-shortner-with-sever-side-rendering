@@ -1,8 +1,8 @@
 # URL Shortener Backend (Server-Side Rendering)
 
-A URL Shortener backend application built using **Node.js**, **Express**, and **MongoDB**, featuring **Server-Side Rendering (SSR)** and **Stateful Authentication** for secure, session-based user access.
+A URL Shortener backend application built using **Node.js**, **Express**, and **MongoDB**, featuring **Server-Side Rendering (SSR)** and **Stateless Authentication** using **JWT** for secure, token-based user access.
 
-This project focuses on generating short URLs, redirecting users efficiently, rendering views on the server, and managing authenticated user sessions using cookies and server-side sessions.
+This project focuses on generating short URLs, redirecting users efficiently, rendering views on the server, and managing authenticated user sessions using **JWT tokens** instead of server-side sessions.
 
 ---
 
@@ -11,9 +11,9 @@ This project focuses on generating short URLs, redirecting users efficiently, re
 - Shorten long URLs into unique short links
 - Fast redirection to original URLs
 - **Server-Side Rendering (SSR)** using template engine
-- **Stateful authentication using sessions**
+- **Stateless authentication using JWT**
 - Secure login & logout functionality
-- Cookie-based session management
+- Token-based authentication stored in **cookies** or **Authorization headers**
 - Dynamic page rendering on the server
 - MongoDB database for URL storage
 - RESTful API structure
@@ -35,22 +35,24 @@ All views are rendered using a server-side template engine instead of client-sid
 
 ---
 
-## 🔐 Stateful Authentication
+## 🔐 Stateless Authentication (JWT)
 
-This project implements **Stateful Authentication**, where the authentication state is maintained on the **server side**.
+This project implements **Stateless Authentication**, where the authentication state is maintained **on the client via tokens**.
 
 ### How it works:
 - User logs in with credentials
-- Server creates a **session**
-- Session ID is stored in a **cookie**
-- Server validates the session on every request
-- User stays logged in until logout or session expiry
+- Server generates a **JWT token**
+- Token is sent to the client (via cookie or Authorization header)
+- Client includes the token on every request
+- Server validates the token on each request
+- User stays authenticated until token expiry
 
 ### Benefits:
-- More control over user sessions
-- Easy session invalidation on logout
-- Better suited for **server-rendered applications**
-- Enhanced security for sensitive operations
+- No server-side session storage required
+- Scalable for distributed systems
+- Easy token invalidation using short expiry or blacklisting
+- Well suited for **API-driven or SSR applications**
+- Secure and modern authentication approach
 
 ---
 
@@ -61,11 +63,10 @@ This project implements **Stateful Authentication**, where the authentication st
 - **MongoDB**
 - **Mongoose**
 - **EJS** (server-side templating)
-- **Express-Session** (stateful authentication)
+- **jsonwebtoken (JWT)** (stateless authentication)
 - **Cookie-Parser**
 - **NanoID** (for generating short URLs)
 
 ---
 
 ## 📁 Project Structure
-
