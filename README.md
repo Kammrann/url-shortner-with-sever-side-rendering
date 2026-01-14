@@ -40,6 +40,7 @@ All views are rendered using a server-side template engine instead of client-sid
 This project implements **Stateless Authentication**, where the authentication state is maintained **on the client via tokens**.
 
 ### How it works:
+
 - User logs in with credentials
 - Server generates a **JWT token**
 - Token is sent to the client (via cookie or Authorization header)
@@ -48,11 +49,26 @@ This project implements **Stateless Authentication**, where the authentication s
 - User stays authenticated until token expiry
 
 ### Benefits:
+
 - No server-side session storage required
 - Scalable for distributed systems
 - Easy token invalidation using short expiry or blacklisting
 - Well suited for **API-driven or SSR applications**
 - Secure and modern authentication approach
+
+## 🔐 Bearer Token Authentication
+
+This project uses **JWT-based Bearer Token Authentication**.
+
+After successful login, the server issues a **JWT token**.  
+The client must include this token in the `Authorization` header for all protected routes.
+
+### Format:
+
+Authorization: Bearer <JWT_TOKEN>
+
+The server verifies the token on each request.  
+If the token is valid, access is granted; otherwise, the request is rejected.
 
 ---
 
